@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Lottery</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="EditText_main_1">打开应用后瞬间想到了什么？</string>
+    <string name="Button_main_1">试试手气！</string>
+
+</resources>
