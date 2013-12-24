@@ -12,16 +12,22 @@ public class DisplayActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.displayresult_displayactivity);
+        setContentView(R.layout.displayresult);
 
         Intent intent=getIntent();
-        String stringfromedit=intent.getStringExtra(MainActivity.EXTRA_geteditText);
+        String getfromMain=intent.getStringExtra(MainActivity.EXTRA_geteditText);
+        Lottery lottery=new Lottery(getfromMain);
+        String Redball="";
+        for (int i=0;i<6;i++){
+            Redball+=lottery.getRedball()[i]+" ";
+        }
+        String Blueball=lottery.getBlueball()+"";
 
+        TextView textView1= (TextView) findViewById(R.id.textView1);
+        TextView textView2= (TextView) findViewById(R.id.textView2);
 
-        TextView textView=new TextView(this);
-        textView.setTextSize(40);
-        textView.setText(stringfromedit);
+        textView1.setText(Redball);
+        textView2.setText(Blueball);
 
-        setContentView(textView);
     }
 }

@@ -1,5 +1,6 @@
 package com.sdrzlyz.lottery;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -13,18 +14,12 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.EditText;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     public static  final String EXTRA_geteditText="com.sdrzlyz.lottery.EXTRA_geteditText";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new DummyFragment())
-                    .commit();
-        }
+        setContentView(R.layout.dispaly_main);
     }
 
     public void click2GetResult(View view){
@@ -55,21 +50,4 @@ public class MainActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * A dummy fragment containing a simple view.
-     */
-    public static class DummyFragment extends Fragment {
-
-        public DummyFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-    }
-
 }
