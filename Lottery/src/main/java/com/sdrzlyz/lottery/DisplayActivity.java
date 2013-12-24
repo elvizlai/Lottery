@@ -28,6 +28,11 @@ public class DisplayActivity extends Activity{
 
         textView1.setText(Redball);
         textView2.setText(Blueball);
-
+        ///////////////////////////
+        try {
+            new Savadata().saveToSDCard("LOTTERY.TXT","19890106");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
