@@ -3,36 +3,44 @@ package com.sdrzlyz.lottery;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 /**
  * Created by lyz on 13-12-20.
  */
-public class DisplayActivity extends Activity{
+public class DisplayActivity extends Activity {
+
+    String getfromMain = null;
+    Lottery lottery = null;
+    String Redball = "";
+    String Blueball = "";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.displayresult);
 
-        Intent intent=getIntent();
-        String getfromMain=intent.getStringExtra(MainActivity.EXTRA_geteditText);
-        Lottery lottery=new Lottery(getfromMain);
-        String Redball="";
-        for (int i=0;i<6;i++){
-            Redball+=lottery.getRedball()[i]+" ";
-        }
-        String Blueball=lottery.getBlueball()+"";
+        Intent intent = getIntent();
+        getfromMain = intent.getStringExtra(MainActivity.EXTRA_geteditText);
+        lottery = new Lottery(getfromMain);
 
-        TextView textView1= (TextView) findViewById(R.id.textView1);
-        TextView textView2= (TextView) findViewById(R.id.textView2);
+        for (int i = 0; i < 6; i++) {
+            Redball += lottery.getRedball()[i] + " ";
+        }
+        Blueball = lottery.getBlueball() + "";
+
+        TextView textView1 = (TextView) findViewById(R.id.textView1);
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
 
         textView1.setText(Redball);
         textView2.setText(Blueball);
         ///////////////////////////
-        try {
-            new Savadata().saveToSDCard("LOTTERY.TXT","19890106");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+    }
+
+    public void click2SaveData(View view) {
+        new Savadata("INPUT:" + getfromMain + "\n" + "MD5:" + lottery.getMD5() + "\n" + "Redball:" + Redball + "\n" + "Blueball:" + Blueball + "\n" +"TIME:"+ lottery.getDate()+"\n"+"==================================="+"\n");
     }
 }

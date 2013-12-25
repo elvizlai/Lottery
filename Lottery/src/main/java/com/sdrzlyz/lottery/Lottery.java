@@ -10,9 +10,8 @@ import java.util.HashSet;
  * Created by lyz on 13-12-23.
  */
 public final class Lottery {
-
-    //private final int total=6;
-    private String str;
+    //用于保存输入的值
+    private String str4usr;
     private int[] Redball;
     private int Blueball;
 
@@ -21,8 +20,8 @@ public final class Lottery {
 
     //构造方法
     public Lottery(String input){
-        str=input+DataToday();
-        Redball=disRepeat(MD5split(MD5(str)));
+        str4usr=input;
+        Redball=disRepeat(MD5split(calMD5(str4usr+getDate())));
     }
 
     public int getBlueball(){
@@ -31,6 +30,14 @@ public final class Lottery {
 
     public int[] getRedball(){
         return Redball;
+    }
+
+    public String getDate(){
+        return DataToday();
+    }
+
+    public String getMD5(){
+        return calMD5(str4usr);
     }
 
     //得到当天的日期
@@ -43,7 +50,7 @@ public final class Lottery {
 
     //MD5计算
     //返回str
-    private String MD5(String s) {
+    private String calMD5(String s) {
         char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
         try {
             byte[] btInput = s.getBytes();
@@ -55,7 +62,7 @@ public final class Lottery {
             byte[] md = mdInst.digest();
             // 把密文转换成十六进制的字符串形式
             int j = md.length;
-            char str[] = new char[j * 2];
+            char[] str = new char[j * 2];
             int k = 0;
             for (int i = 0; i < j; i++) {
                 byte byte0 = md[i];
@@ -81,7 +88,7 @@ public final class Lottery {
                 hex2dec[i]=Integer.parseInt(block[i],16);
                 Blueball+=hex2dec[i];
             }else{
-                block[i]=str.substring(j,j+=6);
+                block[i]=str.substring(j, j += 6);
                 hex2dec[i]=Integer.parseInt(block[i],16);
                 Blueball+=hex2dec[i];
             }
@@ -102,7 +109,7 @@ public final class Lottery {
             if (res.length == 6) {
                 flag = false;
             } else {
-                int[] temp=MD5split(MD5(str+lyz));
+                int[] temp=MD5split(calMD5(str4usr + lyz));
                 lyz++;
                 for (int i = 0; i < res.length; i++) {
                     num[i] = res[i];
